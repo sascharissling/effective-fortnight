@@ -1,32 +1,43 @@
 import React from "react";
-import styled, { css } from "@emotion/native";
-import { Platform } from "react-native";
-
-const AppContainer = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  ${Platform.select({
-    ios: css`
-      background-color: red;
-    `,
-    android: css`
-      background-color: red;
-    `
-  })};
-`;
-
-const Welcome = styled.Text`
-  color: white;
-  font-weight: bold;
-  font-size: 25px;
-  text-align: center;
-`;
+import {
+  AppContainer,
+  GoalInput,
+  GoalTextInput,
+  AddButton,
+  Goals,
+  Goal,
+  GoalWrapper
+} from "./AppComponents";
 
 export default function App() {
+  const [enteredGoal, setEnteredGoal] = React.useState("");
+  const [courseGoals, setCourseGoals] = React.useState([]);
+
+  function handleGoalInput(enteredText) {
+    setEnteredGoal(enteredText);
+  }
+
+  function handleGoalAddition() {
+    setCourseGoals(currentGoals => [...currentGoals, enteredGoal]);
+  }
+
   return (
     <AppContainer>
-      <Welcome>Open up App.js to start working on your app!</Welcome>
+      <GoalInput>
+        <GoalTextInput
+          placeholder="Add goal for course..."
+          onChangeText={handleGoalInput}
+          value={enteredGoal}
+        />
+        <AddButton title="ADD" onPress={handleGoalAddition} />
+      </GoalInput>
+      <Goals>
+        {courseGoals.map(goal => (
+          <GoalWrapper key={goal}>
+            <Goal>{goal}</Goal>
+          </GoalWrapper>
+        ))}
+      </Goals>
     </AppContainer>
   );
 }
