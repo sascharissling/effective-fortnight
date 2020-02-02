@@ -6,7 +6,8 @@ import {
   AddButton,
   Goals,
   Goal,
-  GoalWrapper
+  GoalWrapper,
+  ScrollableGoals
 } from "./AppComponents";
 
 export default function App() {
@@ -31,13 +32,15 @@ export default function App() {
         />
         <AddButton title="ADD" onPress={handleGoalAddition} />
       </GoalInput>
-      <Goals>
-        {courseGoals.map(goal => (
-          <GoalWrapper key={goal}>
-            <Goal>{goal}</Goal>
-          </GoalWrapper>
-        ))}
-      </Goals>
+      <ScrollableGoals>
+        <Goals>
+          {courseGoals.map(goal => (
+            <GoalWrapper key={goal}>
+              <Goal>{goal}</Goal>
+            </GoalWrapper>
+          ))}
+        </Goals>
+      </ScrollableGoals>
     </AppContainer>
   );
 }

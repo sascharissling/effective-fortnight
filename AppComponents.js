@@ -50,3 +50,5 @@ export const GoalWrapper = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const ScrollableGoals = styled.ScrollView``;
